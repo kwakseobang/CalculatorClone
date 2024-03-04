@@ -14,6 +14,7 @@
 		D64D6E2D2B95FB0D005A340F /* CalculatorAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64D6E2C2B95FB0D005A340F /* CalculatorAppTests.swift */; };
 		D64D6E372B95FB0D005A340F /* CalculatorAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64D6E362B95FB0D005A340F /* CalculatorAppUITests.swift */; };
 		D64D6E392B95FB0D005A340F /* CalculatorAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64D6E382B95FB0D005A340F /* CalculatorAppUITestsLaunchTests.swift */; };
+		D64D6E472B960724005A340F /* NumberBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64D6E462B960724005A340F /* NumberBtn.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		D64D6E322B95FB0D005A340F /* CalculatorAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D64D6E362B95FB0D005A340F /* CalculatorAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorAppUITests.swift; sourceTree = "<group>"; };
 		D64D6E382B95FB0D005A340F /* CalculatorAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D64D6E462B960724005A340F /* NumberBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberBtn.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 		D64D6E1A2B95FB0B005A340F /* CalculatorApp */ = {
 			isa = PBXGroup;
 			children = (
+				D64D6E452B9606FB005A340F /* CustomView */,
 				D64D6E1B2B95FB0B005A340F /* CalculatorAppApp.swift */,
 				D64D6E1D2B95FB0B005A340F /* ContentView.swift */,
 				D64D6E1F2B95FB0D005A340F /* Assets.xcassets */,
@@ -125,6 +128,14 @@
 				D64D6E382B95FB0D005A340F /* CalculatorAppUITestsLaunchTests.swift */,
 			);
 			path = CalculatorAppUITests;
+			sourceTree = "<group>";
+		};
+		D64D6E452B9606FB005A340F /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				D64D6E462B960724005A340F /* NumberBtn.swift */,
+			);
+			path = CustomView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,6 +270,7 @@
 			files = (
 				D64D6E1E2B95FB0B005A340F /* ContentView.swift in Sources */,
 				D64D6E1C2B95FB0B005A340F /* CalculatorAppApp.swift in Sources */,
+				D64D6E472B960724005A340F /* NumberBtn.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

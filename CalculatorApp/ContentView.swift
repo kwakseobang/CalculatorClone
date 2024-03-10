@@ -45,11 +45,11 @@ enum BtnType: String {
         case .multiple :
             return "X"
         case .devide :
-            return "$"
+            return "/"
         case .percent :
             return "%"
         case .opposite :
-            return "/"
+            return "+/-"
         case .clear :
             return "C"
         }
@@ -75,12 +75,15 @@ enum BtnType: String {
 }
 struct ContentView: View {
     @State private var totalNumber: String = "0"
+    @State var tempNumber: Int = 0
+    @State var operatorType: BtnType = .clear
+    
     private var btnData: [[BtnType]] = [
         [.clear,.opposite,.percent,.devide],
         [.seventh,.eighth,.nineth,.multiple],
         [.fourth,.fifth,.sixth,.minus],
         [.first,.second,.third,.plus],
-        [.zero,.zero,.dot,.equal],
+        [.zero,.dot,.equal],
     ]
     
     
@@ -98,22 +101,65 @@ struct ContentView: View {
                 }
                 ForEach(btnData, id: \.self) { line in
                     HStack {
+                        //자기 자신의 이름을 id로 부여?
                         ForEach(line, id: \.self) { item in
                             Button{
                                 if totalNumber == "0"{
-                                    totalNumber = "7"
-                                }else {
-                                    totalNumber += "7"
+                                    if item == .clear {
+                                        totalNumber = "0"
+                                    } else if item == .plus || item == .minus || item == .devide || item == .multiple {
+                                        totalNumber = "Error"
+                                    } else {
+                                        totalNumber =  item.btnDisplayName
+                                
+                                    }
+                                } else {
+                                    if item == .clear {
+                                        totalNumber = "0"
+                                    } else if item == .plus {
+                                        //숫자를 저장
+                                        tempNumber = Int(self.totalNumber) ?? 0
+                                        //+
+                                        operatorType = .plus
+                                        totalNumber = "0"
+                                        //남은 숫자 초기화
+                                    }else if item == .multiple {
+                                        //숫자를 저장
+                                        tempNumber = Int(self.totalNumber) ?? 0
+                                        //*
+                                        operatorType = .multiple
+                                        totalNumber = "0"
+                                        //남은 숫자 초기화
+                                    }else if item == .minus {
+                                        //숫자를 저장
+                                        tempNumber = Int(self.totalNumber) ?? 0
+                                        //-
+                                        operatorType = .minus
+                                        totalNumber = "0"
+                                        //남은 숫자 초기화
+                                    }else if item == .equal {
+                                        
+                                        if operatorType == .plus {
+                                            totalNumber = String((Int(self.totalNumber) ?? 0) + tempNumber)
+                                        }else if operatorType == .multiple {
+                                            totalNumber = String((Int(self.totalNumber) ?? 0) * tempNumber)
+                                        }else if operatorType == .minus {
+                                            totalNumber = String(tempNumber - (Int(self.totalNumber) ?? 0) )
+                                        }
+                                    } else {
+                                        totalNumber +=  item.btnDisplayName
+                                    }
+                                    
                                 }
                             }label: {
                                 Text("\(item.btnDisplayName)")
                                     .font(.system(size: 30))
+                                    .foregroundColor(item.foregroundColor)
+                                    .frame(width:  calculateBtnWidth(btn: item) ,height: calculateBtnHeight(btn: item))
+                                    .background(item.backgroundColor)
+                                    .cornerRadius(40)
                                     .foregroundColor(.white)
-                                    .frame(width: 80,height: 80)
-                                    .background(
-                                        Circle()
-                                            .fill(item.backgroundColor.opacity(1)) // opacity 투명도
-                                    )
+                                    
                             }
                         }
                     }
@@ -121,6 +167,20 @@ struct ContentView: View {
             }
         }
     }
+    
+    private func calculateBtnWidth(btn: BtnType) -> CGFloat  {
+        //전체 너비 - 5*10) / 4
+        switch btn {
+        case .zero:
+            return (UIScreen.main.bounds.width - 5*10) / 4 * 2
+        default:
+            return ((UIScreen.main.bounds.width - 5*10) / 4)
+        }
+    }
+    private func calculateBtnHeight(btn: BtnType) -> CGFloat  {
+        //전체 너비 - 5*10) / 4
+            return (UIScreen.main.bounds.width - 5*10) / 4
+        }
 }
 
 #Preview {
